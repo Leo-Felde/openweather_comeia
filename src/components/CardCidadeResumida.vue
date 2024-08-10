@@ -22,7 +22,7 @@
           size="lg"
         />
 
-        <span class="temp"> {{ String(clima.main.temp).slice(0, 4) }}°C </span>
+        <span class="temp"> {{ clima.main.temp.toFixed(1) }}°C </span>
       </div>
     </div>
 
