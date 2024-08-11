@@ -12,26 +12,37 @@
 import VueApexCharts from 'vue-apexcharts'
 
 export default {
-  name: 'TemperatureChart',
+  name: 'ChartClima',
+
   components: {
     apexchart: VueApexCharts,
   },
+
   props: {
     dados: {
       type: Array,
       required: true,
     },
+    showToolbar: {
+      type: Boolean,
+      required: false,
+    },
+    enableZoom: {
+      type: Boolean,
+      required: false,
+    }
   },
+
   data() {
     return {
       chartOptions: {
         chart: {
           id: 'temperature-chart',
           toolbar: {
-            show: false,
+            show: this.showToolbar,
           },
           zoom: {
-            enabled: false,
+            enabled: this.enableZoom,
           },
         },
         xaxis: {
@@ -70,6 +81,7 @@ export default {
       },
     }
   },
+  
   computed: {
     series() {
       return [{

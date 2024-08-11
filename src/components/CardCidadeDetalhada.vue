@@ -2,16 +2,25 @@
   <v-card
     id="cidade-detalhada"
     class="pa-md-2 mb-md-1"
+    :width="width"
+    :max-width="maxWidth"
+    :heigth="heigth"
   >
     <div
-      v-if="cidade.id"
+      v-if="cidade?.id"
     >
       <div class="header d-flex">
-        <span class="cidade-info text-h6">
+        <span
+          id="city-name"
+          class="text-h6"
+        >
           Clima para {{ cidade.name }}
         </span>
 
-        <span class="ml-auto mt-sm-1">
+        <span
+          id="data-hora"
+          class="ml-auto mt-sm-1"
+        >
           {{ dataHora }}
         </span>
       </div>
@@ -22,11 +31,20 @@
             :icon="cidade.weather[0].icon"
             size="xl"
           />
-          <span class="text-h5 my-auto">{{ cidade.main.temp.toFixed(1) }}°C</span>
+          <span
+            id="weather-temp"
+            class="text-h5 my-auto"
+          >{{ cidade.main.temp.toFixed(1) }}°C</span>
         </div>
         <div class="d-flex flex-column ml-auto text-end">
-          <span class="text-subtitle-2">{{ cidade.weather[0].description }}	</span>
-          <span class="text-subtitle-2">vento: {{ cidade.wind.speed }}km/h {{ formatarDirecaoVento(cidade.wind.deg) }}</span>
+          <span
+            id="weather-desc"
+            class="text-subtitle-2"
+          >{{ cidade.weather[0].description }}	</span>
+          <span
+            id="weather-wind"
+            class="text-subtitle-2"
+          >vento: {{ cidade.wind.speed }}km/h {{ formatarDirecaoVento(cidade.wind.deg) }}</span>
         </div>
       </div>
 
@@ -59,6 +77,18 @@ export default {
     cidade: {
       type: Object,
       default: () => ({})
+    },
+    heigth: {
+      type: [String, Number],
+      default: undefined
+    },
+    width: {
+      type: [String, Number],
+      default: undefined
+    },
+    maxWidth: {
+      type: [String, Number],
+      default: '600px'
     }
   },
 
@@ -70,11 +100,10 @@ export default {
   },
 
   watch: {
-    cidade: function (newValue) {
-      if (newValue) {
+    cidade(newValue) {
+      if (newValue && newValue.id !== this.previousId) {
         this.fetchPrevisao()
-      } else {
-        this.previsao = null
+        this.previousId = newValue.id
       }
     }
   },
@@ -118,7 +147,6 @@ export default {
 
 <style lang="sass" scoped>
 #cidade-detalhada
-  max-width: 600px
   width: 100%
 
 .selected

@@ -2,16 +2,24 @@
   <v-autocomplete
     ref="vAutocomplete"
     v-model="cidadeSelecionada"
-    label="Nome"
-    outlined
-    dense
-    return-object
-    prepend-inner-icon="mdi-map"
-    no-data-text="Nenhuma cidade encontrada"
+    :append-icon="appendIcon"
+    :clearable="clearable"
+    :append-outer-icon="appendOuterIcon"
+    :dense="dense"
     :item-text="getItemText"
+    :item-value="itemValue"
     :items="cidadesEncontradas"
+    :label="label"
     :loading="carregandoCidades"
+    :no-data-text="noDataText"
+    :outlined="outlined"
+    :prepend-inner-icon="prependInnerIcon"
+    :prepend-icon="prependIcon"
+    :return-object="returnObject"
+    :suffix="suffix"
     @update:search-input="pesquisarCidade"
+    @click="$emit('click')"
+    @blur="$emit('blur')"
   />
 </template>
 
@@ -26,7 +34,64 @@ export default {
       type: Object,
       required: true,
     },
+    label: {
+      type: String,
+      default: 'cidade'
+    },
+    items: {
+      type: Array,
+      default: null
+    },
+    itemText: {
+      type: [String, Array, Function],
+      default: undefined
+    },
+    itemValue: {
+      type: [String, Array, Function],
+      default: undefined
+    },
+    appendIcon: {
+      type: String,
+      default: undefined
+    },
+    appendOuterIcon: {
+      type: String,
+      default: undefined
+    },
+    noDataText: {
+      type: String,
+      default: 'Nenhuma cidade encontrada'
+    },
+    prependIcon: {
+      type: String,
+      default: undefined
+    },
+    prependInnerIcon: {
+      type: String,
+      default: 'mdi-map'
+    },
+    suffix: {
+      type: String,
+      default: undefined
+    },
+    dense: {
+      type: Boolean,
+      default: false,
+    },
+    outlined: {
+      type: Boolean,
+      default: false,
+    },
+    clearable: {
+      type: Boolean,
+      default: false,
+    },
+    returnObject: {
+      type: Boolean,
+      default: true,
+    }
   },
+
   data() {
     return {
       cidadeSelecionada: this.value,
@@ -34,6 +99,7 @@ export default {
       carregandoCidades: false,
     }
   },
+
   watch: {
     value(newVal) {
       this.cidadeSelecionada = newVal
@@ -43,6 +109,13 @@ export default {
       this.$emit('input', newVal)
     },
   },
+
+  mounted () {
+    if (this.items) {
+      this.cidadesEncontradas = this.items
+    }
+  },
+
   methods: {
     async pesquisarCidade(inputText) {
       if (!inputText || inputText?.length < 3) {
@@ -64,6 +137,8 @@ export default {
     },
 
     getItemText(item) {
+      if (this.itemText) return this.itemText
+
       return `${item.name} ${item.state ? `,${item.state}` : ''}  ${item.country}`
     },
   },

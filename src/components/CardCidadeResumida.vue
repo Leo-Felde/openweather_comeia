@@ -3,6 +3,9 @@
     class="card-cidade-clima pa-md-1 mb-md-1"
     outlined
     :class="{'selected' : selecionada}"
+    :disabled="disabled"
+    :heigth="heigth"
+    :width="width"
     :ripple="false"
     @click="selecionarCidade"
   >
@@ -32,11 +35,11 @@
     >
       <template #activator="{ on }">
         <v-btn
+          class="btn-remover-cidade"
           icon
           small
-          class="btn-remover-cidade"
           v-on="on"
-          @click.stop.prevent="$emit('remover')"
+          @click.stop.prevent="removerCidade"
         >
           <v-icon>
             mdi-close
@@ -64,10 +67,21 @@ export default {
       type: Object,
       default: () => ({})
     },
-
     selecionada:{
       type: Boolean,
       default: false
+    },
+    disabled:{
+      type: Boolean,
+      default: false
+    },
+    heigth: {
+      type: [String, Number],
+      default: undefined
+    },
+    width: {
+      type: [String, Number],
+      default: undefined
     }
   },
 
@@ -94,8 +108,10 @@ export default {
           }
 
           const resp = await getClima(options)
-          this.clima = resp.data
-          delete this.clima.id
+          if (resp?.data) {
+            this.clima = resp.data
+            delete this.clima.id
+          }
         }
       } catch (error) {
         console.error(`Não foi possível obter os dados da cidade ${this.cidade.name || 'CIDADE_NAO_INFORMADA'}:`, error)
@@ -118,6 +134,10 @@ export default {
       }
 
       this.$emit('click', dados)
+    },
+
+    removerCidade () {
+      this.$emit('remover')
     }
   }
 }
