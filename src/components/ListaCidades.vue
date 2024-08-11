@@ -1,11 +1,16 @@
 <template>
-  <v-card id="lista-cidades">
+  <v-card
+    id="lista-cidades"
+    :width="width"
+    :heigth="heigth"
+  >
     <card-cidade-resumida
       v-for="cidade in cidadesSelecionadas"
       :ref="`cidade-resumo-${cidade.id}`"
       :key="cidade.id"
       :cidade="cidade"
       :selecionada="cidade.id === value.id"
+      :disabled="adicionandoCidades"
       @click="updateCidadeSelecionada"
       @remover="removerCidade(cidade)"
     />
@@ -65,6 +70,14 @@ export default {
     value: {
       type: Object,
       default: () => ({})
+    },
+    heigth: {
+      type: [String, Number],
+      default: undefined
+    },
+    width: {
+      type: [String, Number],
+      default: undefined
     }
   },
 
@@ -90,7 +103,7 @@ export default {
       if (this.cidadesSelecionadas.length === 1) {
         setTimeout(() => {
           this.$refs['cidade-resumo-1'][0].selecionarCidade()
-        }, 120)
+        }, 500)
       }
 
       this.cancelarAdicionarCidade()
@@ -106,13 +119,15 @@ export default {
     },
 
     removerCidade (cidade) {
+      if (!cidade?.id) return
+
       const indexCidade = this.cidadesSelecionadas.findIndex(cidadeSel => cidadeSel.id === cidade.id)
       if (indexCidade < 0) return
       
       this.cidadesSelecionadas.splice(indexCidade, 1)
 
       if (!this.cidadesSelecionadas.length) {
-        this.updateCidadeSelecionada(null)
+        this.updateCidadeSelecionada({})
       } else if (this.value.id === cidade.id) {
         this.$refs['cidade-resumo-1'][0].selecionarCidade()
       }

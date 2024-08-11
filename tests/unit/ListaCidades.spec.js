@@ -19,7 +19,7 @@ describe('ListaCidades.vue', () => {
   })
 
   it('Renderiza corretamente a lista de cidades', () => {
-    expect(wrapper.findComponent({ name: 'v-card' }).exists()).toBe(true)
+    expect(wrapper.findComponent('#lista-cidades').exists()).toBe(true)
     expect(wrapper.findAllComponents(CardCidadeResumida).length).toBe(wrapper.vm.cidadesSelecionadas.length)
   })
 
