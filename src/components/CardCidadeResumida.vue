@@ -53,6 +53,8 @@ import { getClima } from '../api/openWeather.js'
 import WeatherIcon from './WeatherIcon.vue'
 
 export default {
+  name: 'CardCidadeResumida',
+
   components: {
     WeatherIcon
   },

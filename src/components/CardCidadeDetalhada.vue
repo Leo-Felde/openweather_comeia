@@ -48,6 +48,8 @@ import ChartClima from './ChartClima.vue'
 import WeatherIcon from './WeatherIcon.vue'
 
 export default {
+  name: 'CardCidadeDetalhada',
+  
   components: {
     WeatherIcon,
     ChartClima

@@ -54,6 +54,8 @@ import autocompleteCidade from './AutocompleteCidade'
 import cardCidadeResumida from './CardCidadeResumida.vue'
 
 export default {
+  name: 'ListaCidades',
+  
   components: {
     autocompleteCidade,
     cardCidadeResumida
@@ -104,7 +106,9 @@ export default {
     },
 
     removerCidade (cidade) {
-      const indexCidade = this.cidadesSelecionadas.indexOf(cid => cid.id === cidade.id)
+      const indexCidade = this.cidadesSelecionadas.findIndex(cidadeSel => cidadeSel.id === cidade.id)
+      if (indexCidade < 0) return
+      
       this.cidadesSelecionadas.splice(indexCidade, 1)
 
       if (!this.cidadesSelecionadas.length) {

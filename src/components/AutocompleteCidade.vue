@@ -1,6 +1,7 @@
 <template>
   <v-autocomplete
-    v-model="selectedCity"
+    ref="vAutocomplete"
+    v-model="cidadeSelecionada"
     label="Nome"
     outlined
     dense
@@ -19,6 +20,7 @@ import { getCidade } from '../api/geolocation.js'
 
 export default {
   name: 'AutocompleteCidade',
+
   props: {
     value: {
       type: Object,
@@ -27,17 +29,17 @@ export default {
   },
   data() {
     return {
-      selectedCity: this.value,
+      cidadeSelecionada: this.value,
       cidadesEncontradas: [],
       carregandoCidades: false,
     }
   },
   watch: {
     value(newVal) {
-      this.selectedCity = newVal
+      this.cidadeSelecionada = newVal
     },
 
-    selectedCity(newVal) {
+    cidadeSelecionada(newVal) {
       this.$emit('input', newVal)
     },
   },
@@ -52,9 +54,9 @@ export default {
         
       try {
         const resp = await getCidade(inputText)
-        this.cidadesEncontradas = resp.data || []
+        this.cidadesEncontradas = resp?.data || []
       } catch (error) {
-        console.error('Error fetching cities:', error)
+        console.error('Nao foi possivel pesquisar cidades', error)
         this.cidadesEncontradas = []
       } finally {
         this.carregandoCidades = false
