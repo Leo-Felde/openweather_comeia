@@ -1,9 +1,10 @@
 <template>
   <v-card
-    class="card-cidade-clima pa-md-1 mb-md-1"
+    class="card-cidade-clima pa-1 mb-1"
     outlined
     :class="{'selected' : selecionada}"
     :disabled="disabled"
+    :flat="flat"
     :heigth="heigth"
     :width="width"
     :ripple="false"
@@ -16,8 +17,8 @@
     />
 
     <div v-else>
-      <span class="cidade-info text-subtitle-2 ml-md-2">
-        {{ cidade.name }} {{ cidade.state ? `, ${ cidade.state }` : '' }}
+      <span class="cidade-info text-subtitle-2 ml-2">
+        {{ cidade.name }}{{ cidade.state ? `, ${ cidade.state }` : '' }}
       </span>
       <div class="cidade-clima text-subtitle-2">
         <weather-icon
@@ -72,6 +73,10 @@ export default {
       default: false
     },
     disabled:{
+      type: Boolean,
+      default: false
+    },
+    flat: {
       type: Boolean,
       default: false
     },

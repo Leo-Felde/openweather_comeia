@@ -139,7 +139,7 @@ export default {
     getItemText(item) {
       if (this.itemText) return this.itemText
 
-      return `${item.name} ${item.state ? `,${item.state}` : ''}  ${item.country}`
+      return `${item.name}${item.state ? `, ${item.state}` : ''}  ${item.country}`
     },
   },
 }

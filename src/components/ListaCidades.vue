@@ -3,6 +3,7 @@
     id="lista-cidades"
     :width="width"
     :heigth="heigth"
+    :flat="flat"
   >
     <card-cidade-resumida
       v-for="cidade in cidadesSelecionadas"
@@ -31,7 +32,7 @@
         />
         
         <v-btn
-          class="ml-sm-2 mt-sm-1"
+          class="ml-2 mt-1"
           color="red"
           fab
           x-small
@@ -78,7 +79,11 @@ export default {
     width: {
       type: [String, Number],
       default: undefined
-    }
+    },
+    flat: {
+      type: Boolean,
+      default: false
+    },
   },
 
   data () {
@@ -103,7 +108,7 @@ export default {
       if (this.cidadesSelecionadas.length === 1) {
         setTimeout(() => {
           this.$refs['cidade-resumo-1'][0].selecionarCidade()
-        }, 500)
+        }, 100)
       }
 
       this.cancelarAdicionarCidade()

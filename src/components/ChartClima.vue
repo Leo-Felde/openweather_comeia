@@ -21,15 +21,15 @@ export default {
   props: {
     dados: {
       type: Array,
-      required: true,
+      required: true
     },
     showToolbar: {
       type: Boolean,
-      required: false,
+      required: false
     },
     enableZoom: {
       type: Boolean,
-      required: false,
+      required: false
     }
   },
 
@@ -39,26 +39,26 @@ export default {
         chart: {
           id: 'temperature-chart',
           toolbar: {
-            show: this.showToolbar,
+            show: this.showToolbar
           },
           zoom: {
-            enabled: this.enableZoom,
-          },
+            enabled: this.enableZoom
+          }
         },
         xaxis: {
           type: 'datetime',
           title: {
-            text: 'Tempo',
-          },
+            text: 'Tempo'
+          }
         },
         yaxis: {
           title: {
             text: 'Temperatura (°C)',
-          },
+          }
         },
         title: {
           text: 'Previsão para os próximos 5 dias',
-          align: 'center',
+          align: 'center'
         },
         tooltip: {
           x: {
@@ -68,17 +68,17 @@ export default {
                 day: '2-digit',
                 month: 'short',
                 hour: '2-digit',
-                minute: '2-digit',
+                minute: '2-digit'
               })
-            },
+            }
           },
           y: {
             formatter: function (val) {
               return `${val.toFixed(1)} °C`
-            },
-          },
-        },
-      },
+            }
+          }
+        }
+      }
     }
   },
   

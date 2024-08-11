@@ -1,10 +1,11 @@
 <template>
   <v-card
     id="cidade-detalhada"
-    class="pa-md-2 mb-md-1"
+    class="pa-2 mb-1"
     :width="width"
     :max-width="maxWidth"
     :heigth="heigth"
+    :flat="flat"
   >
     <div
       v-if="cidade?.id"
@@ -12,20 +13,23 @@
       <div class="header d-flex">
         <span
           id="city-name"
-          class="text-h6"
+          class="text-h6 ml-2"
         >
           Clima para {{ cidade.name }}
         </span>
 
         <span
           id="data-hora"
-          class="ml-auto mt-sm-1"
+          class="ml-auto mt-1"
         >
           {{ dataHora }}
         </span>
       </div>
 
-      <div class="dados-clima d-flex">
+      <div
+        v-if="cidade.weather"
+        class="dados-clima d-flex"
+      >
         <div class="d-flex">
           <weather-icon
             :icon="cidade.weather[0].icon"
@@ -49,7 +53,7 @@
       </div>
 
       <chart-clima
-        v-if="previsao"
+        v-if="previsao?.length"
         :dados="previsao"
       />
     </div>
@@ -78,6 +82,10 @@ export default {
       type: Object,
       default: () => ({})
     },
+    flat: {
+      type: Boolean,
+      default: false
+    },
     heigth: {
       type: [String, Number],
       default: undefined
@@ -94,7 +102,7 @@ export default {
 
   data() {
     return {
-      previsao: null,
+      previsao: [],
       dataHora: null,
     }
   },
@@ -104,6 +112,8 @@ export default {
       if (newValue && newValue.id !== this.previousId) {
         this.fetchPrevisao()
         this.previousId = newValue.id
+      } else {
+        this.previsao = []
       }
     }
   },
