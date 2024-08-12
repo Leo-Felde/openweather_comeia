@@ -129,6 +129,7 @@ export default {
         const resp = await getCidade(inputText)
         this.cidadesEncontradas = resp?.data || []
       } catch (error) {
+        this.$snackbar.showMessage({ content: 'Não foi possível pesquisar as cidades', color: 'error' })
         console.error('Nao foi possivel pesquisar cidades', error)
         this.cidadesEncontradas = []
       } finally {

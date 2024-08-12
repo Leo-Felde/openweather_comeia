@@ -13,6 +13,7 @@ export const getCidade = async (nome) => {
     })
     return response
   } catch (error) {
-    return error
+    console.error('Erro ao obter clima da cidade', error)
+    throw error
   }
 }

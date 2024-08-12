@@ -14,6 +14,7 @@
       </v-app-bar>
       <div class="content mt-16">
         <main-view />
+        <Snackbar />
       </div>
     </v-main>
   </v-app>
@@ -22,13 +23,15 @@
 <script>
 import MainView from './views/Main.vue'
 import ThemeButton from './components/ThemeButton.vue'
+import Snackbar from './components/templates/Snackbar'
 
 export default {
   name: 'App',
 
   components: {
     MainView,
-    ThemeButton
+    ThemeButton,
+    Snackbar
   }
 }
 </script>
