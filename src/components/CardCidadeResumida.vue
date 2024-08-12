@@ -121,7 +121,6 @@ export default {
           }
         }
       } catch (error) {
-        this.$snackbar.showMessage({ content: 'Não foi possível obter os dados da cidade', color: 'error' })
         console.error(`Não foi possível obter os dados da cidade ${this.cidade.name || 'CIDADE_NAO_INFORMADA'}:`, error)
       } finally {
         this.loading = false
