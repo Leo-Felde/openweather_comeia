@@ -10,10 +10,10 @@
       :flat="listaMobile"
       :vertical="listaMobile"
       :width="listaMobile? '100%' : null"
-      :max-width="listaMobile? '100%' : '400px'"
+      :max-width="listaMobile ? '100%' : '400px'"
     />
     <card-cidade-detalhada
-      class="ma-sm-auto my-md-auto mr-md-auto ml-md-4 mx-xs-4"
+      class="ma-sm-auto mt-md-2 mr-md-auto ml-md-4 mx-xs-4"
       :cidade="cidadeSelecionada"
       flat
     />

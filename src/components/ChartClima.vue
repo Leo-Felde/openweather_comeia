@@ -38,7 +38,7 @@ export default {
     return {
       chartOptions: {
         theme: {
-          mode: 'light'
+          mode: this.$vuetify.theme.dark ? 'dark' : 'light'
         },
         chart: {
           id: 'temperature-chart',
