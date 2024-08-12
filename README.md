@@ -12,8 +12,11 @@ Intereface VUE para teste técnico Comeia 🐝
   <li>
     <a href="https://axios-http.com/ptbr/docs/intro">Axios</a>
   </li>
-    <li>
+  <li>
     <a href="https://github.com/jestjs/jest">Jest</a>
+  </li>
+  <li>
+    <a href="https://docs.cypress.io/guides/overview/why-cypress">Cypress</a>
   </li>
 </ul>
 
@@ -45,14 +48,21 @@ Após configurado o .env, basta rodar o seguinte comando em um terminal dentro d
   npm run serve
 ```
 
-#### Rodar os testes (Jest)
+#### Rodar os testes
 
+### Jest
 ```bash
-  npm run test
+  npm run test unit
 ```
  Alternativamente pode ser utilizado o nome de um dos arquvios na pasta /tests/unit, por exemplo
 ```bash
   npm run test AutocompleteCidade.spec.js
 ```
 
-Verifique a [documentação oficial](https://nuxt.com/docs/getting-started/deployment) sobre a build de produção.
+### cypress
+Inicie o cypress
+```bash
+  npx cypress open
+```
+Abra-o em seu navegador de escolha e execute o teste <b>main-view.cy.js<b/>
+
