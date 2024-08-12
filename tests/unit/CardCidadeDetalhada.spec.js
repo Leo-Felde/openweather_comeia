@@ -1,4 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
+import { vuetify } from './setup'
+
 import CardCidadeDetalhada from '@/components/CardCidadeDetalhada.vue'
 import { getPrevisao } from '@/api/openWeather.js'
 
@@ -21,6 +23,7 @@ describe('CardCidadeDetalhada.vue', () => {
 
   beforeEach(() => {
     wrapper = shallowMount(CardCidadeDetalhada, {
+      vuetify,
       propsData: {
         cidade: cidadeMock
       }
@@ -73,7 +76,7 @@ describe('CardCidadeDetalhada.vue', () => {
 
     await wrapper.vm.fetchPrevisao()
 
-    expect(wrapper.vm.previsao).toBeNull()
+    expect(wrapper.vm.previsao).toEqual([])
     expect(console.error).toHaveBeenCalledWith(
       'Não foi possível obter os dados da cidade Rebouças:',
       expect.any(Error)

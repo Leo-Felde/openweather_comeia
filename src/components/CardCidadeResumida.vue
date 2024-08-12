@@ -21,26 +21,18 @@
         <span class="cidade-info text-subtitle-2 ml-2">
           {{ cidade.name }}{{ cidade.state && $vuetify.breakpoint.mdAndUp ? `, ${ cidade.state }` : '' }}
         </span>
-        <v-tooltip
-          left
-          open-delay="300"
+
+        <v-btn
+          class="btn-remover-cidade"
+          :class="{ 'mobile' : $vuetify.breakpoint.smAndDown }"
+          icon
+          small
+          @click.stop.prevent="removerCidade"
         >
-          <template #activator="{ on }">
-            <v-btn
-              class="btn-remover-cidade"
-              :class="{ 'mobile' : $vuetify.breakpoint.smAndDown }"
-              icon
-              small
-              v-on="on"
-              @click.stop.prevent="removerCidade"
-            >
-              <v-icon>
-                mdi-close
-              </v-icon>
-            </v-btn>
-          </template>
-          <span> Remover cidade </span>
-        </v-tooltip>
+          <v-icon>
+            mdi-close
+          </v-icon>
+        </v-btn>
       </div>
       <div class="cidade-clima text-subtitle-2">
         <weather-icon

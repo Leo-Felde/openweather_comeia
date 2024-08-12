@@ -1,4 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
+import { vuetify } from './setup'
+
 import CardCidadeResumida from '@/components/CardCidadeResumida.vue'
 import { getClima } from '@/api/openWeather.js'
 
@@ -22,6 +24,7 @@ describe('CardCidadeResumida.vue', () => {
 
   beforeEach(() => {
     wrapper = shallowMount(CardCidadeResumida, {
+      vuetify,
       propsData: {
         cidade: cidadeMock,
         selecionada: false

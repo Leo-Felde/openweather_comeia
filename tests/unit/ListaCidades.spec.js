@@ -1,4 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
+import { vuetify } from './setup'
+
 import ListaCidades from '@/components/ListaCidades.vue'
 import AutocompleteCidade from '@/components/AutocompleteCidade.vue'
 import CardCidadeResumida from '@/components/CardCidadeResumida.vue'
@@ -8,6 +10,7 @@ describe('ListaCidades.vue', () => {
 
   beforeEach(() => {
     wrapper = shallowMount(ListaCidades, {
+      vuetify,
       propsData: {
         value: {},
       },

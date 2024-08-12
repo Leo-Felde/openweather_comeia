@@ -1,4 +1,4 @@
-<template>
+<<template>
   <v-card
     id="cidade-detalhada"
     class="pa-2 mb-1"
@@ -9,7 +9,7 @@
     color="'#ffffff00'"
   >
     <div
-      v-if="cidade?.id"
+      v-if="cidade.id"
     >
       <div class="header d-flex">
         <span
@@ -57,7 +57,7 @@
         indeterminate
       />
       <chart-clima
-        v-if="previsao?.length"
+        v-if="previsao.length"
         :dados="previsao"
       />
     </div>
@@ -179,4 +179,4 @@ export default {
 
 .cidade-clima
   display: flex
-</style>
+</style>>

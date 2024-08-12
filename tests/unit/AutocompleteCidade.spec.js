@@ -1,4 +1,6 @@
 import { shallowMount } from '@vue/test-utils'
+import { vuetify } from './setup'
+
 import AutocompleteCidade from '@/components/AutocompleteCidade.vue'
 import { getCidade } from '@/api/geolocation.js'
 
@@ -11,6 +13,7 @@ describe('AutocompleteCidade.vue', () => {
 
   beforeEach(() => {
     wrapper = shallowMount(AutocompleteCidade, {
+      vuetify,
       propsData: {
         value: {},
       },
