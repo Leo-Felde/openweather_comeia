@@ -1,10 +1,27 @@
 <template>
-  <div id="main-view">
-    <lista-cidades v-model="cidadeSelecionada" />
-    <card-cidade-detalhada
-      :cidade="cidadeSelecionada"
+  <v-card
+    id="main-view"
+    v-resize="onResize"
+    flat
+    :class="{'flex-column' : listaMobile}"
+    :color="!absoluteBreakpoint ? '#fff' : '#dde9ee'"
+  >
+    <lista-cidades
+      v-model="cidadeSelecionada"
+      :class="{'lista-cidades-absolute' : absoluteBreakpoint}"
+      :flat="listaMobile"
+      :transparent="listaMobile"
+      :vertical="listaMobile"
+      :width="listaMobile? '100%' : null"
+      :max-width="listaMobile? '100%' : '400px'"
     />
-  </div>
+    <card-cidade-detalhada
+      class="ma-sm-auto mx-xs-4"
+      :cidade="cidadeSelecionada"
+      :flat="!absoluteBreakpoint"
+      :transparent="!absoluteBreakpoint"
+    />
+  </v-card>
 </template>
 
 <script>
@@ -21,9 +38,26 @@ export default {
 
   data() {
     return {
-      cidadeSelecionada: {}
+      cidadeSelecionada: {},
+      absoluteBreakpoint: false
     }
   },
+
+  computed: {
+    listaMobile () {
+      return this.$vuetify.breakpoint.smAndDown
+    }
+  },
+
+  mounted () {
+    this.onResize()
+  },
+
+  methods: {
+    onResize () {
+      this.absoluteBreakpoint = window.innerWidth > 1225
+    }
+  }
 }
 </script>
 
@@ -31,12 +65,13 @@ export default {
 #main-view
   display: flex
   height: 100%
+  overflow: hidden
 
-#lista-cidades
+.lista-cidades-absolute
   position: absolute
   top: 10px
   left: 10px
 
 #cidade-detalhada
-  margin: auto !important
+  // margin: auto !important 
 </style>

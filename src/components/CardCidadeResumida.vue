@@ -1,6 +1,6 @@
 <template>
   <v-card
-    class="card-cidade-clima pa-1 mb-1"
+    class="card-cidade-resumida pa-1 mb-1 mx-1"
     outlined
     :class="{'selected' : selecionada}"
     :disabled="disabled"
@@ -18,7 +18,7 @@
 
     <div v-else>
       <span class="cidade-info text-subtitle-2 ml-2">
-        {{ cidade.name }}{{ cidade.state ? `, ${ cidade.state }` : '' }}
+        {{ cidade.name }}{{ cidade.state && $vuetify.breakpoint.mdAndUp ? `, ${ cidade.state }` : '' }}
       </span>
       <div class="cidade-clima text-subtitle-2">
         <weather-icon
@@ -29,7 +29,6 @@
         <span class="temp"> {{ clima.main.temp.toFixed(1) }}°C </span>
       </div>
     </div>
-
     <v-tooltip
       left
       open-delay="300"
@@ -37,6 +36,7 @@
       <template #activator="{ on }">
         <v-btn
           class="btn-remover-cidade"
+          :class="{ 'mobile' : $vuetify.breakpoint.smAndDown }"
           icon
           small
           v-on="on"
@@ -158,10 +158,16 @@ export default {
   position: absolute
   top: 8px
   right: 10px
+  .mobile
+    bottom: 5px !important
 
 .cidade-clima
   display: flex
   .temp, .weather-icon
     margin-top: auto
     margin-bottom: auto
+
+.card-cidade-resumida
+  max-height: 120px !important
+  min-width: 120px
 </style>

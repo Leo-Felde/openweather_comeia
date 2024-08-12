@@ -6,6 +6,7 @@
     :max-width="maxWidth"
     :heigth="heigth"
     :flat="flat"
+    :color="transparent ? '#ffffff00' : '#fff'"
   >
     <div
       v-if="cidade?.id"
@@ -51,7 +52,10 @@
           >vento: {{ cidade.wind.speed }}km/h {{ formatarDirecaoVento(cidade.wind.deg) }}</span>
         </div>
       </div>
-
+      <v-progress-linear
+        v-if="loadingPrevisao"
+        indeterminate
+      />
       <chart-clima
         v-if="previsao?.length"
         :dados="previsao"
@@ -86,6 +90,10 @@ export default {
       type: Boolean,
       default: false
     },
+    transparent: {
+      type: Boolean,
+      default: false
+    },
     heigth: {
       type: [String, Number],
       default: undefined
@@ -104,6 +112,7 @@ export default {
     return {
       previsao: [],
       dataHora: null,
+      loadingPrevisao: false
     }
   },
 
@@ -125,6 +134,7 @@ export default {
   methods: {
     async fetchPrevisao() {
       try {
+        this.loadingPrevisao = true
         if (this.cidade.lat && this.cidade.lon) {
           const options = {
             lat: this.cidade.lat,
@@ -136,6 +146,8 @@ export default {
         }
       } catch (error) {
         console.error(`Não foi possível obter os dados da cidade ${this.cidade.name || 'CIDADE_NAO_INFORMADA'}:`, error)
+      } finally {
+        this.loadingPrevisao = false
       }
     },
 

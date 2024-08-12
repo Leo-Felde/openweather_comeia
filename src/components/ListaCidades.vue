@@ -1,9 +1,13 @@
 <template>
   <v-card
     id="lista-cidades"
+    class="d-flex"
+    :class="{'flex-column' : !vertical}"
     :width="width"
+    :max-width="maxWidth"
     :heigth="heigth"
     :flat="flat"
+    :color="transparent ? '#ffffff00' : '#fff'"
   >
     <card-cidade-resumida
       v-for="cidade in cidadesSelecionadas"
@@ -45,12 +49,26 @@
           </v-icon>
         </v-btn>
       </div>
-      <div v-else>
+      <v-card
+        v-else-if="$vuetify.breakpoint.mdAndUp"
+        outlined
+        class="py-2 pl-2 btn-add-cidade"
+      >
         Adicionar Cidade
         <v-icon color="primary">
           mdi-plus
         </v-icon>
-      </div>
+      </v-card>
+      <v-btn
+        v-else
+        rounded
+        dark
+        small
+        color="primary"
+        class="my-auto"
+      >
+        <v-icon> mdi-plus </v-icon>
+      </v-btn>
     </div>
   </v-card>
 </template>
@@ -80,7 +98,19 @@ export default {
       type: [String, Number],
       default: undefined
     },
+    maxWidth: {
+      type: [String, Number],
+      default: '400px'
+    },
     flat: {
+      type: Boolean,
+      default: false
+    },
+    transparent: {
+      type: Boolean,
+      default: false
+    },
+    vertical: {
       type: Boolean,
       default: false
     },
@@ -145,9 +175,9 @@ export default {
 #lista-cidades
   min-width: 300px
   width: 20vw
-  max-width: 400px
   padding: 10px !important
-  display: flex
-  flex-direction: column
+  overflow: auto
 
+.btn-add-cidade
+  cursor: pointer
 </style>
