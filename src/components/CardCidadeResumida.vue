@@ -154,7 +154,6 @@ export default {
 .selected
   background: #79cff02e
   cursor: default
-  color: #000
 
 .cidade-clima
   display: flex

@@ -1,6 +1,7 @@
 <template>
   <div>
     <apexchart
+      :key="temaDark"
       type="line"
       :options="chartOptions"
       :series="series"
@@ -36,6 +37,9 @@ export default {
   data() {
     return {
       chartOptions: {
+        theme: {
+          mode: 'light'
+        },
         chart: {
           id: 'temperature-chart',
           toolbar: {
@@ -81,9 +85,13 @@ export default {
       }
     }
   },
-  
+
   computed: {
-    series() {
+    temaDark () {
+      return this.$vuetify.theme.dark
+    },
+
+    series () {
       return [{
         name: 'Temperatura',
         data: this.dados.map(dia => ({
@@ -92,6 +100,12 @@ export default {
         })),
       }]
     },
+  },
+  
+  watch: {
+    temaDark (newVal) {
+      this.chartOptions.theme.mode = newVal ? 'dark' : 'light'
+    }
   },
 }
 </script>

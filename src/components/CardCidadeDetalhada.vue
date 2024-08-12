@@ -6,7 +6,7 @@
     :max-width="maxWidth"
     :heigth="heigth"
     :flat="flat"
-    :color="transparent ? '#ffffff00' : '#fff'"
+    color="'#ffffff00'"
   >
     <div
       v-if="cidade?.id"
@@ -87,10 +87,6 @@ export default {
       default: () => ({})
     },
     flat: {
-      type: Boolean,
-      default: false
-    },
-    transparent: {
       type: Boolean,
       default: false
     },

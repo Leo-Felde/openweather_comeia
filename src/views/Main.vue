@@ -8,7 +8,6 @@
     <lista-cidades
       v-model="cidadeSelecionada"
       :flat="listaMobile"
-      :transparent="listaMobile"
       :vertical="listaMobile"
       :width="listaMobile? '100%' : null"
       :max-width="listaMobile? '100%' : '400px'"
@@ -17,7 +16,6 @@
       class="ma-sm-auto my-md-auto mr-md-auto ml-md-4 mx-xs-4"
       :cidade="cidadeSelecionada"
       flat
-      :transparent="!absoluteBreakpoint"
     />
   </v-card>
 </template>

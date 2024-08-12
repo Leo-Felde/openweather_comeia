@@ -8,7 +8,6 @@ const createAPI = (serviceName) => {
   const api = axios.create({
     baseURL,
   })
-  console.log(`## - apiKey: ${apiKey}`)
   api.interceptors.request.use((config) => {
     config.params = config.params || {}
     
