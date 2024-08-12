@@ -17,9 +17,31 @@
     />
 
     <div v-else>
-      <span class="cidade-info text-subtitle-2 ml-2">
-        {{ cidade.name }}{{ cidade.state && $vuetify.breakpoint.mdAndUp ? `, ${ cidade.state }` : '' }}
-      </span>
+      <div class="header-cidade">
+        <span class="cidade-info text-subtitle-2 ml-2">
+          {{ cidade.name }}{{ cidade.state && $vuetify.breakpoint.mdAndUp ? `, ${ cidade.state }` : '' }}
+        </span>
+        <v-tooltip
+          left
+          open-delay="300"
+        >
+          <template #activator="{ on }">
+            <v-btn
+              class="btn-remover-cidade"
+              :class="{ 'mobile' : $vuetify.breakpoint.smAndDown }"
+              icon
+              small
+              v-on="on"
+              @click.stop.prevent="removerCidade"
+            >
+              <v-icon>
+                mdi-close
+              </v-icon>
+            </v-btn>
+          </template>
+          <span> Remover cidade </span>
+        </v-tooltip>
+      </div>
       <div class="cidade-clima text-subtitle-2">
         <weather-icon
           :icon="clima.weather[0].icon"
@@ -29,26 +51,6 @@
         <span class="temp"> {{ clima.main.temp.toFixed(1) }}°C </span>
       </div>
     </div>
-    <v-tooltip
-      left
-      open-delay="300"
-    >
-      <template #activator="{ on }">
-        <v-btn
-          class="btn-remover-cidade"
-          :class="{ 'mobile' : $vuetify.breakpoint.smAndDown }"
-          icon
-          small
-          v-on="on"
-          @click.stop.prevent="removerCidade"
-        >
-          <v-icon>
-            mdi-close
-          </v-icon>
-        </v-btn>
-      </template>
-      <span> Remover cidade </span>
-    </v-tooltip>
   </v-card>
 </template>
 
@@ -154,13 +156,6 @@ export default {
   cursor: default
   color: #000
 
-.btn-remover-cidade
-  position: absolute
-  top: 8px
-  right: 10px
-  .mobile
-    bottom: 5px !important
-
 .cidade-clima
   display: flex
   .temp, .weather-icon
@@ -169,5 +164,14 @@ export default {
 
 .card-cidade-resumida
   max-height: 120px !important
-  min-width: 120px
+  min-width: 150px
+
+.header-cidade
+  display: flex
+  width: 100%
+.cidade-info
+  width: 90%
+
+.btn-remover-cidade
+  width: 10%
 </style>

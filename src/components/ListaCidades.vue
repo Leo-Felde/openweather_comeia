@@ -23,6 +23,7 @@
       v-if="cidadesSelecionadas.length < 5"
       v-ripple="false"
       class="card-cidade-nova"
+      :class="{ 'my-auto' : $vuetify.breakpoint.smAndDown }"
       outlined
       @click="AdicionarCidade"
     >
@@ -36,11 +37,11 @@
         />
         
         <v-btn
-          class="ml-2 mt-1"
+          class="ml-2 my-auto" 
           color="red"
-          fab
-          x-small
           dark
+          small
+          rounded
           elevation="1"
           @click.stop.prevent="cancelarAdicionarCidade"
         >
@@ -65,7 +66,6 @@
         dark
         small
         color="primary"
-        class="my-auto"
       >
         <v-icon> mdi-plus </v-icon>
       </v-btn>

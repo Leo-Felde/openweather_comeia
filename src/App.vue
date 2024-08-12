@@ -1,7 +1,17 @@
 <template>
   <v-app>
     <v-main>
-      <div class="content">
+      <v-app-bar
+        elevation="1"
+        color="white"
+        absolute
+      >
+        🐝
+        <v-toolbar-title>
+          Clima comeia
+        </v-toolbar-title>
+      </v-app-bar>
+      <div class="content mt-16">
         <main-view />
       </div>
     </v-main>

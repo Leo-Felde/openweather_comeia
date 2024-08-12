@@ -4,11 +4,9 @@
     v-resize="onResize"
     flat
     :class="{'flex-column' : listaMobile}"
-    :color="!absoluteBreakpoint ? '#fff' : '#dde9ee'"
   >
     <lista-cidades
       v-model="cidadeSelecionada"
-      :class="{'lista-cidades-absolute' : absoluteBreakpoint}"
       :flat="listaMobile"
       :transparent="listaMobile"
       :vertical="listaMobile"
@@ -16,9 +14,9 @@
       :max-width="listaMobile? '100%' : '400px'"
     />
     <card-cidade-detalhada
-      class="ma-sm-auto mx-xs-4"
+      class="ma-sm-auto my-md-auto mr-md-auto ml-md-4 mx-xs-4"
       :cidade="cidadeSelecionada"
-      :flat="!absoluteBreakpoint"
+      flat
       :transparent="!absoluteBreakpoint"
     />
   </v-card>
