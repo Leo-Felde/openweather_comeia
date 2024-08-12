@@ -1,19 +1,17 @@
 import axios from 'axios'
 
 const appURL = 'http://api.openweathermap.org'
-const apiKey = '8b11bc852b8cf3f301115623d1ef5dff'
+const apiKey = process.env.VUE_APP_OWM_KEY
 
 const createAPI = (serviceName) => {
   const baseURL = `${appURL}/${serviceName}`
   const api = axios.create({
     baseURL,
   })
-
+  console.log(`## - apiKey: ${apiKey}`)
   api.interceptors.request.use((config) => {
-    // Ensure that params is initialized if not present
     config.params = config.params || {}
     
-    // Add the appid to the params instead of headers
     config.params['appid'] = apiKey
 
     return config
