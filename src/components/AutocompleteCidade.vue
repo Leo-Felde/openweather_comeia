@@ -17,6 +17,7 @@
     :prepend-icon="prependIcon"
     :return-object="returnObject"
     :suffix="suffix"
+    auto-select-first
     @update:search-input="pesquisarCidade"
     @click="$emit('click')"
     @blur="$emit('blur')"
