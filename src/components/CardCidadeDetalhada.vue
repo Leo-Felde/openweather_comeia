@@ -1,4 +1,4 @@
-<<template>
+<template>
   <v-card
     id="cidade-detalhada"
     class="pa-2 mb-1"
